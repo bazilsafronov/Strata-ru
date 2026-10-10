@@ -2,211 +2,167 @@
 
 **English** · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Português](README.pt-BR.md)
 
-<p align="center"><b>Run a 125-billion-parameter AI model on your own gaming PC</b><br>
-NVIDIA or AMD graphics card (12 GB or more) · Windows or Linux · free and open source</p>
+<p align="center"><b>Запустите ИИ-модель со 125 миллиардами параметров на своем игровом ПК</b><br>
+Видеокарта NVIDIA или AMD (от 12 ГБ) · Windows или Linux · бесплатно и с открытым исходным кодом</p>
 
-<p align="center"><a href="https://github.com/Niko1221/Strata/releases/download/v0.1.10/Pagoda.mp4"><img src="docs/media/pagoda-preview.webp" width="720" alt="A voxel pagoda garden that Strata's model wrote, running in the browser"></a><br>
-<sub>A voxel pagoda garden, 1 shot prompt running on an RTX 5070 with Strata (IQ3_S, 128K context) ·
-<a href="https://github.com/Niko1221/Strata/releases/download/v0.1.10/Pagoda.mp4">full video (49 s)</a></sub></p>
+<p align="center"><a href="https://github.com/Niko1221/Strata/releases/download/v0.1.10/Pagoda.mp4"><img src="docs/media/pagoda-preview.webp" width="720" alt="Воксельный сад пагод, созданный моделью Strata, работающий в браузере"></a><br>
+<sub>Воксельный сад пагод, запрос с одним примером (1 shot), запущенный на RTX 5070 через Strata (IQ3_S, контекст 128K) ·
+<a href="https://github.com/Niko1221/Strata/releases/download/v0.1.10/Pagoda.mp4">полное видео (49 с)</a></sub></p>
 
-Strata runs **[Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next)** on a normal PC. This is a
-large, smart AI model that usually needs a server. It chats, writes code, reads pictures and works with your apps
-and coding agents. Nothing leaves your PC.
+Strata запускает **[Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next)** на обычном ПК. Это большая и умная ИИ-модель, которая обычно требует серверного оборудования. Она поддерживает чат, пишет код, анализирует изображения и работает с вашими приложениями и агентными системами программирования. Никакие данные не покидают ваш ПК.
 
-## How fast is it?
+## Насколько это быстро?
 
-We measured it on two ordinary gaming PCs. A token is about ¾ of a word.
+Мы провели измерения на двух обычных игровых ПК. Один токен составляет примерно ¾ слова.
 
-- **Writes answers:** how fast the reply appears in a short chat. 60 tokens per second is faster than you can read.
-- **Reads your prompt:** how fast it takes in what you send (here a 32K-token document, code or chat history).
+- **Генерация ответа:** скорость появления ответа в коротком диалоге. 60 токенов в секунду — это быстрее, чем вы можете читать.
+- **Чтение вашего запроса:** скорость обработки отправляемых вами данных (здесь документ объемом 32K токенов, код или история чата).
 
 <table>
-<tr><th>NVIDIA: RTX 5070 (12 GB), Ryzen 5 7600, 64 GB RAM</th><th>AMD: RX 9070 XT (16 GB), Ryzen 9 3900X, 47 GB RAM</th></tr>
+<tr><th>NVIDIA: RTX 5070 (12 ГБ), Ryzen 5 7600, 64 ГБ ОЗУ</th><th>AMD: RX 9070 XT (16 ГБ), Ryzen 9 3900X, 47 ГБ ОЗУ</th></tr>
 <tr><td>
 
-| Size | Writes answers | Reads your prompt |
+| Размер | Генерация ответа | Чтение вашего запроса |
 | --- | ---: | ---: |
-| **Q2_0** | 94 tokens/s | 2,650 tokens/s |
-| **IQ2_XS** | 79 tokens/s | 2,090 tokens/s |
-| **IQ3_XXS** | 62 tokens/s | 1,750 tokens/s |
-| **IQ3_S** | 53 tokens/s | 1,620 tokens/s |
-| **Coder** | 55 tokens/s | 2,180 tokens/s |
+| **Q2_0** | 94 токенов/с | 2 650 токенов/с |
+| **IQ2_XS** | 79 токенов/с | 2 090 токенов/с |
+| **IQ3_XXS** | 62 токенов/с | 1 750 токенов/с |
+| **IQ3_S** | 53 токенов/с | 1 620 токенов/с |
+| **Coder** | 55 токенов/с | 2 180 токенов/с |
 
 </td><td>
 
-| Size | Writes answers | Reads your prompt |
+| Размер | Генерация ответа | Чтение вашего запроса |
 | --- | ---: | ---: |
-| **Q2_0** | 60 tokens/s | 1,160 tokens/s |
-| **IQ2_XS** | 52 tokens/s | 1,110 tokens/s |
-| **Coder** | 44 tokens/s | 1,420 tokens/s |
+| **Q2_0** | 60 токенов/с | 1 160 токенов/с |
+| **IQ2_XS** | 52 токенов/с | 1 110 токенов/с |
+| **Coder** | 44 токенов/с | 1 420 токенов/с |
 
 </td></tr>
 </table>
 
-NVIDIA: Q2_0 with engine 0.1.36, the other rows with 0.1.26 (4K answers, 32K prompts). The full tables are in
-[DETAILS.md](docs/DETAILS.md#speed-measured). A card with more VRAM is faster: an RTX 3090 (24 GB) should write
-about 100-140 tokens per second. Long chats and other cards: [speed of each model](docs/MODELS.md#how-fast-is-each-size),
-[community results](docs/COMMUNITY_BENCHMARKS.md).
+NVIDIA: Q2_0 с движком версии 0.1.36, остальные строки — с версией 0.1.26 (ответы 4K, запросы 32K). Полные таблицы находятся в файле [DETAILS.md](docs/DETAILS.md#speed-measured). Карта с большим объемом VRAM работает быстрее: RTX 3090 (24 ГБ) должна генерировать около 100–140 токенов в секунду. Длинные чаты и другие карты: [скорость каждой модели](docs/MODELS.md#how-fast-is-each-size), [результаты сообщества](docs/COMMUNITY_BENCHMARKS.md).
 
-<p align="center"><a href="https://buymeacoffee.com/strataengine"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a><br>
-<sub>Strata is free. If it runs well on your PC, a coffee keeps the work on it going.</sub></p>
+<p align="center"><a href="https://buymeacoffee.com/strataengine"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Купить мне кофе" height="50"></a><br>
+<sub>Strata бесплатна. Если она хорошо работает на вашем ПК, чашка кофе поддержит дальнейшую разработку.</sub></p>
 
-## What you need
+## Что вам понадобится
 
 | | |
 | --- | --- |
-| **Graphics card** | **NVIDIA** GeForce RTX 20, 30, 40 or 50 series, or **AMD** Radeon RX 7900 XT / XTX, RX 7800 XT / 7700 XT, RX 9060 XT, RX 9070 / 9070 XT, Radeon AI PRO R9700 or RX 6800 / 6900 series. It needs **12 GB of VRAM or more**. |
-| **RAM** | 32 GB or more. Your RAM decides [which model](#which-model-should-i-pick) fits. 64 GB runs every size. |
-| **Disk** | About 80 GB free. Use an SSD if you can: the first start is much faster. |
-| **System** | Windows 10 / 11 or Linux, and a current graphics driver from NVIDIA or AMD. |
+| **Видеокарта** | **NVIDIA** GeForce серий RTX 20, 30, 40 или 50, либо **AMD** Radeon RX 7900 XT / XTX, RX 7800 XT / 7700 XT, RX 9060 XT, RX 9070 / 9070 XT, Radeon AI PRO R9700 или серии RX 6800 / 6900. Требуется **от 12 ГБ видеопамяти (VRAM)**. |
+| **Оперативная память (RAM)** | От 32 ГБ. Объем ОЗУ определяет, [какая модель](#какую-модель-выбрать) поместится. 64 ГБ достаточно для любого размера. |
+| **Диск** | Около 80 ГБ свободного места. По возможности используйте SSD: первый запуск пройдет намного быстрее. |
+| **Система** | Windows 10 / 11 или Linux, а также актуальные драйверы видеокарты от NVIDIA или AMD. |
 
-The installer sets up everything else. Two or three cards can share the model ([multi-GPU](docs/MULTI_GPU.md)).
+Установщик настроит всё остальное. Две или три карты могут совместно использовать модель ([мульти-GPU](docs/MULTI_GPU.md)).
 
-Experimental, written and tested by community members on their own machines:
+Экспериментальные варианты, написанные и протестированные участниками сообщества на своих машинах:
 
-- **Older graphics cards** (Tesla P40 / V100, GTX 10, Radeon VII / MI50, RX 6700 XT, RX 5500 XT): [Older GPUs](docs/OLDER_GPUS.md).
-- **Intel Arc**, built from source on Linux: [Intel Arc](docs/INTEL_ARC.md).
-- **AMD Ryzen AI Max (Strix Halo)**, built from source on Linux: [Strix Halo](docs/STRIX_HALO.md).
-- **Older processors without AVX2**: they work, but slowly. [Older CPUs](docs/INSTALL.md#older-cpus-experimental).
+- **Старые видеокарты** (Tesla P40 / V100, GTX 10, Radeon VII / MI50, RX 6700 XT, RX 5500 XT): [Старые GPU](docs/OLDER_GPUS.md).
+- **Intel Arc**, сборка из исходного кода на Linux: [Intel Arc](docs/INTEL_ARC.md).
+- **AMD Ryzen AI Max (Strix Halo)**, сборка из исходного кода на Linux: [Strix Halo](docs/STRIX_HALO.md).
+- **Старые процессоры без поддержки AVX2**: работают, но медленно. [Старые CPU](docs/INSTALL.md#older-cpus-experimental).
 
-The full list: [docs/INSTALL.md](docs/INSTALL.md#what-you-need).
+Полный список: [docs/INSTALL.md](docs/INSTALL.md#what-you-need).
 
-## Install
+## Установка
 
-### Let your AI set it up
+### Позвольте ИИ настроить систему за вас
 
-Do you use an AI coding assistant (Claude Code, Cursor, Codex, GitHub Copilot, ...)? Paste this into it:
+Вы используете ИИ-ассистента для программирования (Claude Code, Cursor, Codex, GitHub Copilot и т. д.)? Вставьте в него следующую команду:
 
 ```text
 Set up Strata on this PC for me: https://github.com/Niko1221/Strata - follow docs/AI_SETUP.md in that repository.
 ```
 
-It checks your graphics card, RAM and disk and picks the model that fits. Then it installs and starts it and tells
-you how to connect your apps. AI tools can also install, start and stop Strata through its
-[MCP server](docs/MCP_SERVER.md).
+Он проверит вашу видеокарту, оперативную память и диск, затем выберет подходящую модель. После этого он установит и запустит её, а также подскажет, как подключить ваши приложения. ИИ-инструменты также могут устанавливать, запускать и останавливать Strata через её [MCP-сервер](docs/MCP_SERVER.md).
 
-### Or do it yourself
+### Или сделайте это самостоятельно
 
-[Download Strata](https://github.com/Niko1221/Strata/archive/refs/heads/main.zip) and unzip it (or `git clone` it).
-**Windows:** double-click **`START-HERE.bat`**. **Linux:** run **`./setup.sh`** in the Strata folder.
+[Скачайте Strata](https://github.com/Niko1221/Strata/archive/refs/heads/main.zip) и распакуйте архив (или выполните `git clone`).
+**Windows:** дважды кликните по файлу **`START-HERE.bat`**. **Linux:** запустите **`./setup.sh`** в папке Strata.
 
-The steps are the same for NVIDIA and AMD. The installer finds your card and sets up the right engine for it. It
-asks you a few questions:
+Шаги одинаковы для NVIDIA и AMD. Установщик обнаружит вашу карту и настроит подходящий для неё движок. Он задаст несколько вопросов:
 
-- which model and which size,
-- how much context (how much text the model keeps in mind),
-- whether it should read pictures.
+- какую модель и какой размер выбрать,
+- какой объем контекста нужен (сколько текста модель будет «помнить»),
+- нужно ли ей анализировать изображения.
 
-Press Enter each time for the recommended answer. Then it downloads the model (about 70 GB) and starts it. If the
-download stops, run it again: it continues where it left off. Your browser opens the Strata app at
-`http://127.0.0.1:8080`.
+Нажимайте Enter, чтобы согласиться с рекомендуемым вариантом. Затем программа скачает модель (около 70 ГБ) и запустит её. Если загрузка прервется, просто запустите скрипт снова: она продолжится с места остановки. В вашем браузере откроется приложение Strata по адресу `http://127.0.0.1:8080`.
 
-> **While the model starts, your PC can be slow or stop responding for 1-3 minutes** (longest the first time).
-> Strata loads 35-55 GB into your RAM and locks part of it for the graphics card. This is normal. Wait, and don't
-> close the window. The window shows what Strata is doing.
+> **Во время запуска модели ваш ПК может замедлиться или перестать реагировать на 1–3 минуты** (дольше всего при первом запуске).
+> Strata загружает 35–55 ГБ в оперативную память и резервирует часть её для видеокарты. Это нормально. Подождите и не закрывайте окно. В окне отображается текущий статус работы Strata.
 
-**Next time**, run `START-HERE.bat` (or `./setup.sh`) again. It starts right away and downloads nothing twice. Close
-its window to stop the model. `UPDATE.bat` (`./update.sh`) updates Strata without starting it. Updating, Docker,
-several cards, where the files go and every option: [docs/INSTALL.md](docs/INSTALL.md).
+**В следующий раз** просто снова запустите `START-HERE.bat` (или `./setup.sh`). Запуск произойдет мгновенно, повторной загрузки не будет. Закройте окно программы, чтобы остановить модель. Скрипт `UPDATE.bat` (`./update.sh`) обновляет Strata без её запуска. Обновление, Docker, использование нескольких карт, расположение файлов и все опции: [docs/INSTALL.md](docs/INSTALL.md).
 
-## Which model should I pick?
+## Какую модель выбрать?
 
-The installer recommends one for your RAM. The same model comes in several sizes, compressed more or less. Smaller
-sizes are faster. Larger sizes are a bit smarter.
+Установщик рекомендует вариант в зависимости от объема вашей оперативной памяти. Одна и та же модель поставляется в нескольких размерах с разной степенью сжатия. Меньшие размеры работают быстрее. Большие размеры немного умнее.
 
-| Your RAM | Take | Why |
+| Ваша ОЗУ | Выберите | Почему |
 | --- | --- | --- |
-| **32 GB** | **Coder** | it fits 32 GB, and it is made for code (with a 24 GB card, Q2_0 and IQ2_XS run too) |
-| **48 GB** | **IQ2_XS** (or Q2_0, the fastest) | the larger sizes do not fit |
-| **64 GB** | **IQ2_XS** (recommended), or IQ3_XXS / IQ3_S | every size fits; IQ3_S is the best and the slowest |
-| **96 GB or more** | **IQ3_S**, or Unsloth's UD-IQ4_XS (~4-bit) | room for the largest sizes with everything else open |
+| **32 ГБ** | **Coder** | помещается в 32 ГБ и создана для работы с кодом (с картой на 24 ГБ также подойдут Q2_0 и IQ2_XS) |
+| **48 ГБ** | **IQ2_XS** (или Q2_0, самый быстрый) | более крупные размеры не поместятся |
+| **64 ГБ** | **IQ2_XS** (рекомендуется), или IQ3_XXS / IQ3_S | подходят все размеры; IQ3_S — лучший по качеству, но самый медленный |
+| **От 96 ГБ** | **IQ3_S**, или Unsloth UD-IQ4_XS (~4 бит) | достаточно места для самых крупных размеров с учетом других открытых приложений |
 
-- **[Coder](docs/MODELS.md#coder):** a coding version with half of the experts removed. It reaches 91% of the full
-  model's SWE-bench Verified score (measured by its authors) and fits 32 GB of RAM. It is weaker outside code,
-  including Chinese and other CJK text (#438). For those, take Q2_0, IQ2_XS or IQ3_S, which keep every expert.
-- **[Swift 1.5](docs/MODELS.md#swift-15):** a fine-tune that thinks for a much shorter time before it answers. You
-  get the answer sooner, at about the same quality.
-- **[Unsloth UD-IQ4_XS](docs/MODELS.md#unsloth-ud-iq4_xs):** Unsloth's ~4-bit version, between IQ3_S and
-  UD-Q4_K_XL in quality. A 94 GB download. With less than ~80 GB of RAM, Strata reads part of it from the SSD
-  while it answers, so it is slower there (an NVMe SSD helps).
-- **[Unsloth UD-Q4_K_XL](docs/MODELS.md#unsloth-ud-q4_k_xl-experimental)** (experimental): the closest to the full
-  model. But Strata reads most of it from the SSD while it answers, so it writes only 7-8.5 tokens/s on a 64 GB PC.
-- **[OrcaRouter's Uncensored IQ3_XXS](docs/MODELS.md#orcarouter-uncensored-iq3_xxs):** you set it up by hand. It is
-  not in the installer's menu.
+- **[Coder](docs/MODELS.md#coder):** версия для программирования, из которой удалена половина экспертов. Она достигает 91% результата полной модели в тесте SWE-bench Verified (по данным авторов) и помещается в 32 ГБ ОЗУ. Она слабее в задачах, не связанных с кодом, включая китайский и другие языки CJK (#438). Для таких задач выбирайте Q2_0, IQ2_XS или IQ3_S, где сохранены все эксперты.
+- **[Swift 1.5](docs/MODELS.md#swift-15):** дообученная версия, которая тратит гораздо меньше времени на «размышления» перед ответом. Вы получаете ответ быстрее при примерно том же качестве.
+- **[Unsloth UD-IQ4_XS](docs/MODELS.md#unsloth-ud-iq4_xs):** ~4-битная версия от Unsloth, по качеству находится между IQ3_S и UD-Q4_K_XL. Загрузка занимает 94 ГБ. При объеме ОЗУ менее ~80 ГБ Strata считывает часть данных с SSD во время генерации ответа, поэтому скорость там ниже (поможет NVMe SSD).
+- **[Unsloth UD-Q4_K_XL](docs/MODELS.md#unsloth-ud-q4_k_xl-experimental)** (экспериментальная): максимально близка к полной модели. Но Strata считывает большую её часть с SSD во время ответа, поэтому скорость генерации на ПК с 64 ГБ ОЗУ составляет всего 7–8,5 токенов/с.
+- **[OrcaRouter's Uncensored IQ3_XXS](docs/MODELS.md#orcarouter-uncensored-iq3_xxs):** настраивается вручную. Отсутствует в меню установщика.
 
-Sizes, downloads and what fits where: [docs/MODELS.md](docs/MODELS.md). To add another model later, run
-`SETUP.bat` (Linux: `./setup.sh --setup`).
+Размеры, объемы загрузок и требования к системе: [docs/MODELS.md](docs/MODELS.md). Чтобы добавить другую модель позже, запустите `SETUP.bat` (Linux: `./setup.sh --setup`).
 
-## Using it
+## Использование
 
-<p align="center"><img src="docs/media/runpagoda.png" width="900" alt="The Strata app's Monitor tab next to a coding agent"><br>
-<sub>The Strata app's <b>Monitor</b> (left) while a coding agent writes the pagoda garden from the video (right)</sub></p>
+<p align="center"><img src="docs/media/runpagoda.png" width="900" alt="Вкладка Monitor приложения Strata рядом с агентом программирования"><br>
+<sub>Вкладка <b>Monitor</b> приложения Strata (слева) во время того, как агент программирования создает сад пагод из видео (справа)</sub></p>
 
-- **In the browser:** open `http://127.0.0.1:8080`. It has **Chat**, a live **Monitor** of the model and your
-  GPU/CPU/RAM, and **About** with the settings and addresses.
-- **Your apps and coding agents:** add an "OpenAI-compatible" provider with the base URL
-  **`http://127.0.0.1:8080/v1`**. Any API key and any model name work.
-  - Apps that use Anthropic's API: `http://127.0.0.1:8080/v1/messages` (Claude Code:
-    `ANTHROPIC_BASE_URL=http://127.0.0.1:8080`).
-  - Codex CLI and other apps that use the OpenAI Responses API: `/v1/responses`
-    ([setup](docs/DETAILS.md#the-responses-api-and-codex-cli)).
-- **Thinking:** choose **off, low, medium or high** in the chat menu or in your app's "reasoning effort". Off is the
-  fastest. High is best for hard questions.
-- **Pictures:** say yes to "Images?" in setup. Then click **Picture** in the chat, or attach pictures in your app.
-  AMD cards read pictures on Linux through the processor; on Windows they can't yet.
-- **From your phone or another PC:** `START-HERE.bat --setup --host 0.0.0.0 --api-key <secret>`. Always set a key.
-- **One request at a time:** by default Strata answers one request, and the others wait. To answer several at once,
-  set `"parallel": 2` ([BATCHING.md](docs/BATCHING.md)). On a 12 GB card this makes each answer slower.
-- **Long prompts:** Strata reads the first message of a chat in full, about 1 minute per 30,000 tokens. Follow-up
-  messages start in seconds.
+- **В браузере:** откройте `http://127.0.0.1:8080`. Здесь есть разделы **Chat** (Чат), живой **Monitor** (Мониторинг) состояния модели, GPU/CPU/RAM, а также **About** (О программе) с настройками и адресами.
+- **Ваши приложения и агенты:** добавьте провайдера, совместимого с OpenAI, используя базовый URL **`http://127.0.0.1:8080/v1`**. Подойдет любой API-ключ и любое название модели.
+  - Приложения, использующие API Anthropic: `http://127.0.0.1:8080/v1/messages` (для Claude Code: `ANTHROPIC_BASE_URL=http://127.0.0.1:8080`).
+  - Codex CLI и другие приложения, использующие OpenAI Responses API: `/v1/responses` ([настройка](docs/DETAILS.md#the-responses-api-and-codex-cli)).
+- **Режим мышления (Thinking):** выберите **off, low, medium или high** в меню чата или в настройках «reasoning effort» вашего приложения. Off — самый быстрый. High лучше всего подходит для сложных вопросов.
+- **Изображения:** ответьте «Да» на вопрос «Images?» при установке. Затем нажмите **Picture** в чате или прикрепите изображения в своем приложении. Карты AMD читают изображения в Linux через процессор; в Windows эта функция пока недоступна.
+- **С телефона или другого ПК:** `START-HERE.bat --setup --host 0.0.0.0 --api-key <secret>`. Всегда устанавливайте ключ.
+- **Один запрос за раз:** по умолчанию Strata обрабатывает один запрос, остальные ждут в очереди. Чтобы обрабатывать несколько запросов одновременно, установите `"parallel": 2` ([BATCHING.md](docs/BATCHING.md)). На карте с 12 ГБ памяти это замедлит каждый отдельный ответ.
+- **Длинные запросы:** Strata полностью читает первое сообщение в чате примерно за 1 минуту на каждые 30 000 токенов. Последующие сообщения обрабатываются за секунды.
 
-More: [where your chats are stored](docs/INSTALL.md#where-things-are-stored), [the API](docs/DETAILS.md#using-it).
+Подробнее: [где хранятся ваши чаты](docs/INSTALL.md#where-things-are-stored), [API](docs/DETAILS.md#using-it).
 
-## Something went wrong?
+## Что-то пошло не так?
 
-- **My PC froze the first time Strata started.** This is normal while it loads the model. Wait, and don't close the
-  window. Still frozen after 10 minutes? Restart the PC, close other programs and try again, or pick a smaller size.
-- **It stopped while downloading or installing.** Run `START-HERE.bat` (or `./setup.sh`) again. It continues where
-  it stopped.
-- **It's very slow and the disk light keeps blinking, or it says "the engine stopped unexpectedly".** Your PC does
-  not have enough free RAM. Close other programs (browsers use a lot), or pick a smaller size (Q2_0 or IQ2_XS).
-- **It says port 8080 is already in use.** Strata is already running. Look for its window.
+- **Мой ПК завис при первом запуске Strata.** Это нормально во время загрузки модели. Подождите и не закрывайте окно. Зависание длится более 10 минут? Перезагрузите ПК, закройте другие программы и попробуйте снова, либо выберите модель меньшего размера.
+- **Процесс остановился во время загрузки или установки.** Снова запустите `START-HERE.bat` (или `./setup.sh`). Загрузка продолжится с места остановки.
+- **Работает очень медленно, индикатор диска постоянно мигает, или появляется сообщение «the engine stopped unexpectedly».** На вашем ПК недостаточно свободной оперативной памяти. Закройте другие программы (браузеры потребляют много ресурсов) или выберите модель меньшего размера (Q2_0 или IQ2_XS).
+- **Сообщение о том, что порт 8080 уже занят.** Strata уже запущена. Найдите её окно.
 
-More problems and their fixes: [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md). Still stuck? Open an
-[issue](https://github.com/Niko1221/Strata/issues) and attach `strata-<model>.log` from the Strata folder. Found a
-security problem? Report it privately: [SECURITY.md](SECURITY.md).
+Больше проблем и способов их решения: [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md). Всё еще не получается? Создайте [задачу (issue)](https://github.com/Niko1221/Strata/issues) и прикрепите файл `strata-<model>.log` из папки Strata. Обнаружили проблему безопасности? Сообщите о ней конфиденциально: [SECURITY.md](SECURITY.md).
 
-## How does it work?
+## Как это работает?
 
-Models like this one usually run on servers with hundreds of gigabytes of graphics memory. Your graphics card has
-12-24 GB. Strata makes the model fit by **sharing the work across your whole PC**. Think of a kitchen: the things
-you use all the time stay on the counter, and the rest waits in the pantry.
+Подобные модели обычно запускаются на серверах с сотнями гигабайт видеопамяти. У вашей видеокарты всего 12–24 ГБ. Strata позволяет вместить модель, **распределяя нагрузку по всему вашему ПК**. Представьте кухню: то, что вы используете постоянно, лежит на столешнице, а остальное ждет в кладовой.
 
-<p align="center"><img src="docs/media/how-it-works.svg" width="860" alt="The model's 24,576 experts: the busiest on the graphics card, all of them in RAM, a lookup table on the SSD"></p>
+<p align="center"><img src="docs/media/how-it-works.svg" width="860" alt="24 576 экспертов модели: самые загруженные находятся на видеокарте, все они есть в ОЗУ, таблица поиска — на SSD"></p>
 
-- **The model is a team of 24,576 small specialists ("experts").** Each word needs only 10 of them.
-- **Your graphics card** keeps the few thousand experts that are used most often. **Your RAM** holds all of them,
-  and **your processor** works on the rest at the same time. **Your SSD** holds a big lookup table.
+- **Модель состоит из команды из 24 576 небольших специалистов («экспертов»).** Для каждого слова требуется только 10 из них.
+- **Ваша видеокарта** хранит несколько тысяч экспертов, которые используются чаще всего. **Ваша ОЗУ** содержит всех экспертов, а **ваш процессор** параллельно обрабатывает остальных. **Ваш SSD** хранит большую таблицу поиска.
 
-<p align="center"><img src="docs/media/guess-and-check.svg" width="860" alt="A small helper guesses the next words; the big model checks them all at once and keeps the right ones"></p>
+<p align="center"><img src="docs/media/guess-and-check.svg" width="860" alt="Небольшой помощник угадывает следующие слова; большая модель проверяет их все сразу и оставляет правильные"></p>
 
-- **Guess, then check:** a small helper guesses the next few words. The big model checks them all at once. You get
-  the same answer, 1.6-1.8x sooner.
-- **Long texts are read in big pieces** (up to 8,192 tokens at a time), at over 1,000 tokens per second.
+- **Угадай, затем проверь:** небольшой помощник предполагает следующие несколько слов. Большая модель проверяет их все сразу. Вы получаете тот же ответ, но на 1,6–1,8 раза быстрее.
+- **Длинные тексты читаются большими кусками** (до 8 192 токенов за раз) со скоростью более 1 000 токенов в секунду.
 
-The longer explanation: [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md). Every part and its numbers:
-[the details](docs/DETAILS.md#how-it-works) and the [paper](docs/paper/Strata-Paper.pdf).
+Более подробное объяснение: [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md). Каждая часть и её показатели: [подробности](docs/DETAILS.md#how-it-works) и [научная статья](docs/paper/Strata-Paper.pdf).
 
-## Credits and license
+## Благодарности и лицензия
 
-The model is [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next) by the Qwen team. It was
-compressed by [ISTA-DASLab](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF), UkisAI (Swift 1.5)
-and Unsloth. Strata uses parts of [llama.cpp / ggml](https://github.com/ggml-org/llama.cpp). All credits:
-[docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md#credits). Strata is open source under the [MIT License](LICENSE). A few
-parts and every model have their own licenses ([which ones](docs/HOW_IT_WORKS.md#license)).
+Модель — [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next) от команды Qwen. Она была сжата лабораторией [ISTA-DASLab](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF), UkisAI (Swift 1.5) и Unsloth. Strata использует части проекта [llama.cpp / ggml](https://github.com/ggml-org/llama.cpp). Все благодарности: [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md#credits). Strata распространяется с открытым исходным кодом под лицензией [MIT License](LICENSE). Некоторые части и каждая модель имеют свои собственные лицензии ([какие именно](docs/HOW_IT_WORKS.md#license)).
 
-## Support Strata
+## Поддержите Strata
 
-Strata is free and open source. If it is useful to you, you can support its development:
+Strata бесплатна и имеет открытый исходный код. Если она полезна для вас, вы можете поддержать её разработку:
 
-<p align="center"><a href="https://buymeacoffee.com/strataengine"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a></p>
+<p align="center"><a href="https://buymeacoffee.com/strataengine"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Купить мне кофе" height="50"></a></p>
